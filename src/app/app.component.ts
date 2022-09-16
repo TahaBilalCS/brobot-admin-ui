@@ -10,10 +10,7 @@ export class AppComponent {
   title = 'brobot-admin-ui';
 
   constructor(private http: HttpClient) {
-    this.http.get('http://localhost:3000/api/', {responseType: 'text'}).subscribe((data) => {
-      console.log("Dev", data);
-    });
-    this.http.get('https://brobot.live/api/', {responseType: 'text'}).subscribe((data) => {
+    this.http.get('https://brobot.live/api/auth/twitch/status', {withCredentials: true}).subscribe((data) => {
       console.log("Live", data);
     });
   }
