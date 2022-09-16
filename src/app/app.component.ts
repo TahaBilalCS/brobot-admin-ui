@@ -19,7 +19,7 @@ export class AppComponent {
   }
    onLogin() {
     console.log("Click")
-    this.http.get('https://brobot.live/api/auth/twitch/login').subscribe(res => {
+    this.http.get('https://brobot.live/api/auth/twitch/login', {withCredentials: true}).subscribe(res => {
       console.log("AUTH LOGIN RES", res)
     })
   }
