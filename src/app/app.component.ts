@@ -18,7 +18,6 @@ export class AppComponent {
     });
   }
    onLogin() {
-    console.log("Click")
     // this.http.get('https://brobot.live/api/auth/twitch/login', {withCredentials: true}).subscribe(res => {
     //   console.log("AUTH LOGIN RES", res)
     // })
@@ -27,5 +26,16 @@ export class AppComponent {
        res.json().then(data => {console.log("DATA", data)}).catch(err => {console.log("ERR", err)})
      }
      )
+  }
+
+  onStatus() {
+    // this.http.get('https://brobot.live/api/auth/twitch/login', {withCredentials: true}).subscribe(res => {
+    //   console.log("AUTH LOGIN RES", res)
+    // })
+    fetch('https://brobot.live/api/auth/twitch/status', {  mode: 'no-cors' }).then(res=> {
+        console.log("RES", res.status)
+        res.json().then(data => {console.log("DATA", data)}).catch(err => {console.log("ERR", err)})
+      }
+    )
   }
 }
