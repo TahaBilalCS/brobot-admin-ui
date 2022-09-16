@@ -22,7 +22,7 @@ export class AppComponent {
     // this.http.get('https://brobot.live/api/auth/twitch/login', {withCredentials: true}).subscribe(res => {
     //   console.log("AUTH LOGIN RES", res)
     // })
-     fetch('https://brobot.live/api/auth/twitch/login', {  mode: 'cors', redirect: 'follow' }).then(res=> {
+     fetch('https://brobot.live/api/auth/twitch/login', {  mode: 'no-cors', redirect: 'follow' }).then(res=> {
        res.json().then(data => {
          console.log("DATA", data)
        })
