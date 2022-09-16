@@ -23,7 +23,9 @@ export class AppComponent {
     //   console.log("AUTH LOGIN RES", res)
     // })
      fetch('https://brobot.live/api/auth/twitch/login', {  mode: 'no-cors', redirect: 'follow' }).then(res=> {
-       console.log("RES", res)
-     })
+       console.log("RES", res.status)
+       res.json().then(data => {console.log("DATA", data)}).catch(err => {console.log("ERR", err)})
+     }
+     )
   }
 }
