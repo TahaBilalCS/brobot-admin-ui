@@ -17,7 +17,7 @@ export class AppComponent {
       console.log("Live", data);
     });
   }
-   onClick1() {
+   onLogin() {
     console.log("Click")
     this.http.get('https://brobot.live/api/auth/twitch/login').subscribe(res => {
       console.log("AUTH LOGIN RES", res)
