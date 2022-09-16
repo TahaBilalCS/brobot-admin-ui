@@ -17,4 +17,10 @@ export class AppComponent {
       console.log("Live", data);
     });
   }
+   onClick1() {
+    console.log("Click")
+    this.http.get('http://localhost:3000/api/auth/twitch/login').subscribe(res => {
+      console.log("AUTH LOGIN RES", res)
+    })
+  }
 }
