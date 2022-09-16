@@ -19,7 +19,7 @@ export class AppComponent {
   }
    onClick1() {
     console.log("Click")
-    this.http.get('http://localhost:3000/api/auth/twitch/login').subscribe(res => {
+    this.http.get('https://brobot.live/api/auth/twitch/login').subscribe(res => {
       console.log("AUTH LOGIN RES", res)
     })
   }
