@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-
+import {environment} from "src/environments/environment";
+import {isDevMode} from "@angular/core";
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -8,6 +9,9 @@ import {HttpClient} from "@angular/common/http";
 })
 export class AppComponent {
   title = 'brobot-admin-ui';
+  isDevMode = isDevMode();
+  apiUrl = environment.apiUrl;
+  siteUrl = environment.siteUrl;
 
   constructor(private http: HttpClient) {
     this.http.get('https://brobot.live/api/auth/twitch/status', {withCredentials: true}).subscribe((data) => {
