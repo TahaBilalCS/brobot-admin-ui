@@ -13,7 +13,9 @@ import { AuthService } from 'src/app/core/services/auth/auth.service';
   providedIn: 'root',
 })
 export class TwitchAuthGuard implements CanActivate {
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router) {
+    console.log('Auth Guard Constructor');
+  }
 
   canActivate(
     route: ActivatedRouteSnapshot,
@@ -23,6 +25,7 @@ export class TwitchAuthGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
+    console.log('Auth Guard Start');
     if (this.authService.twitchUserStatus.getValue()) {
       return true;
     }

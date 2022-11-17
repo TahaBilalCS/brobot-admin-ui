@@ -1,2 +1,5 @@
 <p>Login Page (Not Logged In)</p>
-<p style="white-space: pre" *ngIf="outcome">{{ outcome }}</p>
+<button (click)="onNav()">Nav</button>
+<a [href]="twitchLoginUrl">
+  <button mat-button color="red">Login</button>
+</a>

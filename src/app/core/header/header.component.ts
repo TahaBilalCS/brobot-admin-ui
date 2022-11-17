@@ -14,7 +14,6 @@ import { isDevMode } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
   apiUrl = environment.apiUrl;
-  twitchLoginUrl = `${this.apiUrl}/api/auth/twitch/login`;
   twitchStreamerLoginUrl = `${this.apiUrl}/api/auth/twitch/login2`;
   twitchBotLoginUrl = `${this.apiUrl}/api/auth/twitch/login3`;
 
