@@ -3,34 +3,31 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import {HttpClientModule} from "@angular/common/http";
-import { LoginComponent } from './login/login.component';
-import { HomeComponent } from './home/home.component';
-import { HeaderComponent } from 'src/app/header/header.component';
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {MatToolbarModule} from "@angular/material/toolbar";
-import {MatButtonModule} from "@angular/material/button";
+import { HttpClientModule } from '@angular/common/http';
 
-const AppMaterialModules = [
-  MatToolbarModule,
-  MatButtonModule
-]
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CoreModule } from './core/core.module';
+import { FeatureModule } from './feature/feature.module';
+import { SharedModule } from './shared/shared.module';
+
+const AppMaterialModules: [] = [];
+const GlobalModules = [CoreModule];
+const FeatureModules = [FeatureModule];
+const SharedModules = [SharedModule];
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HomeComponent,
-    HeaderComponent,
-    LoginComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    ...AppMaterialModules
+    ...AppMaterialModules,
+    ...GlobalModules,
+    ...FeatureModules,
+    ...SharedModules,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

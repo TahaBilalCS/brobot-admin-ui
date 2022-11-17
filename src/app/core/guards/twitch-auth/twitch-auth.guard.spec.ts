@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { TwitchAuthGuard } from 'src/app/services/twitch-auth-guard.service';
+import { TwitchAuthGuard } from 'src/app/core/guards/twitch-auth/twitch-auth-guard.service';
 
 describe('AuthGuard', () => {
   let guard: TwitchAuthGuard;

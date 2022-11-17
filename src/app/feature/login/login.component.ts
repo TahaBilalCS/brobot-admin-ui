@@ -1,34 +1,34 @@
 import { Component, OnInit } from '@angular/core';
-import {HttpClient, HttpErrorResponse} from "@angular/common/http";
-import {environment} from "src/environments/environment";
-import {webSocket} from "rxjs/webSocket";
-import {PokemonClient} from "pokenode-ts";
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
+import { webSocket } from 'rxjs/webSocket';
+// import { PokemonClient } from 'pokenode-ts';
 
 interface BattleOutcomeRes {
   body: {
-    outcome?: string[]
-  }
+    outcome?: string[];
+  };
 }
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
   apiUrl = environment.apiUrl;
 
-  outcome: string = ''
+  outcome: string = '';
   // private wsSubject = webSocket({
   //   url: environment.wsUrl,
   // });
-  pokemonClient: PokemonClient = new PokemonClient({cacheOptions: {}});
+  // pokemonClient: PokemonClient = new PokemonClient({ cacheOptions: {} });
 
-  constructor(private http: HttpClient) {
-  }
+  constructor(private http: HttpClient) {}
 
   async ngOnInit(): Promise<void> {
+    let x = 3;
 
-    console.log('Init Login')
+    console.log('Init Login');
     // this.wsSubject.subscribe(
     //   msg => {
     //     console.log("WS Message", msg)
@@ -36,7 +36,6 @@ export class LoginComponent implements OnInit {
     //   err => console.error("ERROR SOCKET", err),
     //   () => console.warn('SOCKET complete')
     // )
-
 
     // const p = await this.pokemonClient.getPokemonById(10)
 
@@ -57,9 +56,13 @@ export class LoginComponent implements OnInit {
 
     // this.wsSubject.next({event: 'message', data: 'Sup'})
 
-    this.http.get(`${this.apiUrl}/api/pokemonTeams`, {withCredentials: true, params: {teamName: 'lebrotherbill'}}).subscribe(
-      async (res: any) => {
-        console.log("TEWAM RES", res)
+    this.http
+      .get(`${this.apiUrl}/api/pokemonTeams`, {
+        withCredentials: true,
+        params: { teamName: 'lebrotherbill' },
+      })
+      .subscribe(async (res: any) => {
+        console.log('TEWAM RES', res);
 
         // if (res.pokemonTeam && res.pokemonTeam.pokemon && res.pokemonTeam.pokemon.length >0) {
         //   console.log('whats up')
@@ -70,8 +73,7 @@ export class LoginComponent implements OnInit {
         //     console.log(`DB NAME: ${pokemon.nameId} UI NAME:${pokemonUI.name} UI ID:${pokemonUI.id}`,pokemonUI.sprites.front_default)
         //   }
         // }
-      }
-    )
+      });
     // this.http.get(`${this.apiUrl}/api/allPokemon`, {withCredentials: true, observe: "response"}).subscribe(async (res: any) => {
     //   console.log('BEGIN')
     //   for (let i = 418; i<= 419; i++) {

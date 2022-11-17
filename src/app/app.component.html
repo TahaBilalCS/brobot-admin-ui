@@ -2,11 +2,11 @@
 
 <!--<p>SPACER</p>-->
 <app-nav-header></app-nav-header>
-<p>Username: {{(twitchUser$ | async)?.displayName || 'N/A'}}</p>
-<p>Scope: {{(twitchUser$ | async)?.scope || 'N/A'}}</p>
-<p>Roles: {{(twitchUser$ | async)?.roles || 'N/A'}}</p>
-<p>Development: {{isDevMode}}</p>
-<p>API Url: {{apiUrl}}</p>
-<p>Site Url: {{siteUrl}}</p>
+<p>Username: {{ (twitchUser$ | async)?.displayName || "N/A" }}</p>
+<p>Scope: {{ (twitchUser$ | async)?.scope || "N/A" }}</p>
+<p>Roles: {{ (twitchUser$ | async)?.roles || "N/A" }}</p>
+<p>Development: {{ isDevMode }}</p>
+<p>API Url: {{ apiUrl }}</p>
+<p>Site Url: {{ siteUrl }}</p>
 
 <router-outlet></router-outlet>
