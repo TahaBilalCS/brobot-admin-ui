@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {environment} from "src/environments/environment";
-import {AuthService, TwitchUser} from "src/app/services/auth.service";
+import {AuthService, TwitchUserStatus} from "src/app/services/auth.service";
 import {BehaviorSubject} from "rxjs";
 import {isDevMode} from "@angular/core";
 
@@ -20,14 +20,14 @@ export class HeaderComponent implements OnInit {
   allowedStreamer = isDevMode() ? 'lebrotherbill': 'tramadc'
   allowedBot = 'b_robot'
 
-  public twitchUser$ = new BehaviorSubject<TwitchUser | null>(null)
+  public twitchUser$ = new BehaviorSubject<TwitchUserStatus | null>(null)
 
   constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
-    this.twitchUser$ = this.authService.twitchUser
+    this.twitchUser$ = this.authService.twitchUserStatus
 
-    this.authService.twitchUser.subscribe((twitchUser) => {
+    this.authService.twitchUserStatus.subscribe((twitchUser) => {
       console.log("Header Status", twitchUser)
       this.isAuthenticated = !!twitchUser;
     })

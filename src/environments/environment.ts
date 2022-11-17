@@ -5,7 +5,8 @@
 export const environment = {
   production: false,
   apiUrl: "http://localhost:3000",
-  siteUrl: "http://localhost:4200"
+  siteUrl: "http://localhost:4200",
+  wsUrl: "ws://172.17.237.51:3000/api/admin-ui"
 };
 
 /*

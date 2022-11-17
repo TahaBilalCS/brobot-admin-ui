@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {environment} from "src/environments/environment";
 import {isDevMode} from "@angular/core";
-import {AuthService, TwitchUser} from "src/app/services/auth.service";
+import {AuthService, TwitchUserStatus} from "src/app/services/auth.service";
 import {BehaviorSubject} from "rxjs";
 @Component({
   selector: 'app-root',
@@ -13,7 +13,7 @@ export class AppComponent implements OnInit {
   title = 'brobot-admin-ui';
   isDevMode = isDevMode();
 
-  twitchUser$ = new BehaviorSubject<TwitchUser | null>(null)
+  twitchUser$ = new BehaviorSubject<TwitchUserStatus | null>(null)
 
   apiUrl = environment.apiUrl;
   siteUrl = environment.siteUrl;
@@ -21,8 +21,10 @@ export class AppComponent implements OnInit {
   constructor(private authService: AuthService) {}
 
   ngOnInit() {
+    // const audio = new Audio('https://play.pokemonshowdown.com/audio/cries/abomasnow.mp3')
+    // audio.play()
     console.log("App Auth User")
-    this.twitchUser$ = this.authService.twitchUser;
+    this.twitchUser$ = this.authService.twitchUserStatus;
     this.authService.authenticateTwitchUser()
   }
 }

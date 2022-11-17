@@ -5,13 +5,11 @@ import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {BehaviorSubject, map, Observable, Subject} from "rxjs";
 
-export interface TwitchUser {
-  accountCreated: Date;
+export interface TwitchUserStatus {
   displayName: string;
-  email: string;
-  id: string;
+  scope: string[];
+  roles: string[];
   oauthId: string;
-  profileImageUrl: string;
 }
 
 @Injectable({
@@ -20,7 +18,7 @@ export interface TwitchUser {
 export class AuthService {
   apiUrl = environment.apiUrl;
 
-  twitchUser = new BehaviorSubject<TwitchUser | null>(null)
+  twitchUserStatus = new BehaviorSubject<TwitchUserStatus | null>(null)
 
   constructor(private router: Router, private http: HttpClient) { }
 
@@ -28,10 +26,10 @@ export class AuthService {
     return this.http.get(`${this.apiUrl}/api/auth/twitch/status`, {withCredentials: true, observe: "response"}).pipe(map((res) => {
       console.log("Auth Twitch User", res)
       if(res.status === 200){
-        this.twitchUser.next(res.body as TwitchUser)
+        this.twitchUserStatus.next(res.body as TwitchUserStatus)
         return res.body;
       } else {
-        this.twitchUser.next(null)
+        this.twitchUserStatus.next(null)
         return null;
       }
     }))
@@ -42,7 +40,7 @@ export class AuthService {
   public logout() {
     this.http.get(`${this.apiUrl}/api/auth/twitch/logout`, {withCredentials: true, observe: "response"}).subscribe((res) => {
       if(res.status === 200) {
-        this.twitchUser.next(null)
+        this.twitchUserStatus.next(null)
         this.router.navigate(['/login'])
       }
     })
