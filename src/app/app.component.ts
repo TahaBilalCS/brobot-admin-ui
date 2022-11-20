@@ -1,9 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  AuthService,
-  TwitchUserStatus,
-} from 'src/app/core/services/auth/auth.service';
-import { BehaviorSubject } from 'rxjs';
+import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -11,13 +7,19 @@ import { BehaviorSubject } from 'rxjs';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  twitchUser$ = new BehaviorSubject<TwitchUserStatus | null>(null);
+  login = false;
 
-  constructor(private authService: AuthService) {}
+  constructor(private router: Router) {
+    this.router.events.subscribe((event: any) => {
+      if (event instanceof NavigationEnd) {
+        this.login = event.url === '/login';
+      }
+    });
+  }
 
   ngOnInit() {
-    console.log('App Init - Authenticate User');
-    this.twitchUser$ = this.authService.twitchUserStatus;
-    this.authService.authenticateTwitchUser();
+    console.log('APP INIT');
+    // this.authService.loading$.subscribe((loading) => {
+    // });
   }
 }

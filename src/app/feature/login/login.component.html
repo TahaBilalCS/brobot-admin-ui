@@ -1,5 +1,25 @@
-<p>Login Page (Not Logged In)</p>
-<button (click)="onNav()">Nav</button>
-<a [href]="twitchLoginUrl">
-  <button mat-button color="red">Login</button>
-</a>
+<div
+  [@fadeIn]="state"
+  (@fadeIn.done)="onDone()"
+  [style.backgroundImage]="currentImage"
+  id="home"
+  [style.visibility]="!loading ? 'visible' : 'hidden'"
+  class="pt-5"
+>
+  <div #loginBtn id="loginBtn">
+    <a
+      (mouseover)="btnHovered = true"
+      (mouseleave)="btnHovered = false"
+      [href]="twitchLoginUrl"
+      *ngIf="
+        (twitchUserStatus$ | async) === null && (loading$ | async) === false
+      "
+    >
+      <button mat-button color="blue">
+        <span [style.visibility]="btnHovered ? 'visible' : 'hidden'">
+          Login
+        </span>
+      </button>
+    </a>
+  </div>
+</div>

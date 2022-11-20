@@ -1,0 +1,10 @@
+.app-container {
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+  //background-color: #0f0f0f;
+  background-color: darkred;
+}
+app-nav-header {
+  flex: 0 1 auto;
+}

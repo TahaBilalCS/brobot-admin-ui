@@ -1,13 +1,142 @@
-/* You can add global styles to this file, and also import other style files */
-// todo Check these two imports
-@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
-@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@use "@angular/material" as mat;
+@include mat.core();
 
-html,
-body {
-  height: 100%;
+$md-mcgpalette0: (
+  50: red,
+  100: red,
+  200: red,
+  300: red,
+  400: red,
+  500: #0f0f0f,
+  600: #0d0d0d,
+  700: #0b0b0b,
+  800: #080808,
+  900: #040404,
+  A100: red,
+  A200: red,
+  A400: red,
+  A700: red,
+  contrast: (
+    50: red,
+    100: red,
+    200: red,
+    300: red,
+    400: red,
+    500: #ffffff,
+    600: red,
+    700: red,
+    800: red,
+    900: red,
+    A100: red,
+    A200: red,
+    A400: red,
+    A700: red,
+  ),
+);
+
+$app-accent: (
+  50: white,
+  100: white,
+  200: white,
+  300: white,
+  400: white,
+  500: white,
+  600: white,
+  700: white,
+  800: white,
+  900: white,
+  A100: white,
+  A200: white,
+  A400: white,
+  A700: white,
+  contrast: (
+    50: blue,
+    100: blue,
+    200: blue,
+    300: blue,
+    400: blue,
+    500: blue,
+    600: blue,
+    700: blue,
+    800: blue,
+    900: blue,
+    A100: blue,
+    A200: blue,
+    A400: blue,
+    A700: blue,
+  ),
+);
+
+$my-app-primary: mat.define-palette($md-mcgpalette0);
+$my-app-accent: mat.define-palette($app-accent, A200, A100, A400);
+$my-app-warn: mat.define-palette(mat.$red-palette);
+
+input.mat-input-element {
+  color: mat.get-color-from-palette($my-app-accent, 500);
+}
+
+p {
+  color: mat.get-color-from-palette($my-app-accent, 500);
+}
+
+.bottom-sheet-audio-backdrop {
+  background-color: #0f0f0f;
+}
+
+.mat-bottom-sheet-container {
+  background-color: #1f1f1fff !important;
+}
+
+// Define a dark theme
+$dark-theme: mat.define-dark-theme(
+  (
+    color: (
+      primary: $my-app-primary,
+      accent: $my-app-accent,
+      warn: $my-app-warn,
+    ),
+    // Only include `typography` and `density` in the default dark theme.
+    typography: mat.define-typography-config(),
+    density: 0,
+  )
+);
+
+// Apply the dark theme by default
+@include mat.core-theme($dark-theme);
+@include mat.button-theme($dark-theme);
+@include mat.all-component-themes($dark-theme);
+
+// Define a light theme
+$light-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: mat.define-palette(mat.$indigo-palette),
+      accent: mat.define-palette(mat.$pink-palette),
+    ),
+  )
+);
+
+// Apply the light theme only when the user prefers light themes.
+@media (prefers-color-scheme: light) {
+  // Use the `-color` mixins to only apply color styles without reapplying the same
+  // typography and density styles.
+  @include mat.core-color($light-theme);
+  @include mat.button-color($light-theme);
+}
+
+.lightMode {
+  @include mat.all-component-colors($light-theme);
+}
+
+* {
+  font-family: Roboto Mono, "Arial", sans-serif;
+}
+
+html {
+  height: 100vh;
 }
 body {
+  height: 100vh;
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+  padding: 0;
 }

@@ -21,6 +21,6 @@ export class HomeComponent implements OnInit {
   constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
-    this.twitchUser$ = this.authService.twitchUserStatus;
+    this.twitchUser$ = this.authService.twitchUserStatus$;
   }
 }

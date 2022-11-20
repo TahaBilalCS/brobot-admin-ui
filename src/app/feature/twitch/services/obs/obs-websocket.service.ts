@@ -8,7 +8,7 @@ export class ObsWebsocketService {
   //   url: environment.wsUrl,
   // });
   constructor() {
-    console.log('ObsWebsocketService');
+    console.log('ObsWebsocketService Constructor');
     // const audio = new Audio('https://play.pokemonshowdown.com/audio/cries/abomasnow.mp3')
     // audio.play()
 

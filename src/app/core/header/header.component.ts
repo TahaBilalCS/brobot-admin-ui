@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import {
   AuthService,
@@ -6,6 +6,7 @@ import {
 } from 'src/app/core/services/auth/auth.service';
 import { BehaviorSubject } from 'rxjs';
 import { isDevMode } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav-header',
@@ -17,25 +18,25 @@ export class HeaderComponent implements OnInit {
   twitchStreamerLoginUrl = `${this.apiUrl}/api/auth/twitch/login2`;
   twitchBotLoginUrl = `${this.apiUrl}/api/auth/twitch/login3`;
 
-  isAuthenticated = false;
-
   allowedStreamer = isDevMode() ? 'lebrotherbill' : 'tramadc';
   allowedBot = 'b_robot';
 
-  public twitchUser$ = new BehaviorSubject<TwitchUserStatus | null>(null);
+  public twitchUserStatus$ = new BehaviorSubject<TwitchUserStatus | null>(null);
+  public loading$ = new BehaviorSubject<boolean>(true);
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
-    this.twitchUser$ = this.authService.twitchUserStatus;
-
-    this.authService.twitchUserStatus.subscribe((twitchUser) => {
-      console.log('Header Status', twitchUser);
-      this.isAuthenticated = !!twitchUser;
-    });
+    console.log('HEADER INIT');
+    this.twitchUserStatus$ = this.authService.twitchUserStatus$;
+    this.loading$ = this.authService.loading$;
   }
 
   logout() {
     this.authService.logout();
+  }
+
+  navHome() {
+    this.router.navigate(['/home']).then();
   }
 }

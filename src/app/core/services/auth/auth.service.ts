@@ -1,13 +1,19 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { isDevMode } from '@angular/core';
 import {
   HttpClient,
   HttpErrorResponse,
   HttpResponse,
 } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { BehaviorSubject, map, Observable, Subject } from 'rxjs';
+import {
+  BehaviorSubject,
+  catchError,
+  finalize,
+  map,
+  Observable,
+  throwError,
+} from 'rxjs';
 
 export interface TwitchUserStatus {
   displayName: string;
@@ -22,29 +28,47 @@ export interface TwitchUserStatus {
 export class AuthService {
   apiUrl = environment.apiUrl;
 
-  twitchUserStatus = new BehaviorSubject<TwitchUserStatus | null>(null);
+  public twitchUserStatus$ = new BehaviorSubject<TwitchUserStatus | null>(null);
+  public loading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
+    true
+  );
 
-  constructor(private router: Router, private http: HttpClient) {
-    console.log('AUTH SERVICE CONSTRUCTOR');
-  }
+  constructor(private router: Router, private http: HttpClient) {}
 
   public authenticateTwitchUser(): Observable<TwitchUserStatus | null> {
-    console.log('AUTHENTICATING....');
+    console.log('authenticateTwitchUser');
+    this.loading$.next(true);
     return this.http
       .get<TwitchUserStatus>(`${this.apiUrl}/api/auth/twitch/status`, {
         withCredentials: true,
         observe: 'response', // So we can look at response headers
       })
       .pipe(
+        catchError((err) => {
+          let errorMsg = '';
+          if (err instanceof HttpErrorResponse) {
+            if (err.status === 0) {
+              errorMsg = 'Unable to connect to server';
+            } else {
+              errorMsg = err.error.message;
+            }
+          }
+          return throwError(() => {
+            return errorMsg;
+          });
+        }),
         map((res: HttpResponse<TwitchUserStatus>) => {
-          console.log('AUTHENTICATING...RESPONSE', res);
           if (res.status === 200) {
-            this.twitchUserStatus.next(res.body);
+            this.twitchUserStatus$.next(res.body);
             return res.body;
           } else {
-            this.twitchUserStatus.next(null);
+            this.twitchUserStatus$.next(null);
             return null;
           }
+        }),
+        finalize(() => {
+          console.log('Auth Twitch User Complete');
+          this.loading$.next(false);
         })
       );
   }
@@ -57,13 +81,9 @@ export class AuthService {
       })
       .subscribe((res) => {
         if (res.status === 200) {
-          this.twitchUserStatus.next(null);
+          this.twitchUserStatus$.next(null);
           this.router.navigate(['/login']);
         }
       });
   }
-
-  // public login() {
-  //   this.router.navigate(['/']);
-  // }
 }

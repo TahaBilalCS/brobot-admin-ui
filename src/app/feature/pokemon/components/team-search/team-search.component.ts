@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 // import { PokemonClient } from 'pokenode-ts';
 
 @Component({
@@ -9,7 +10,8 @@ import { Component, OnInit } from '@angular/core';
 export class TeamSearchComponent implements OnInit {
   // pokemonClient: PokemonClient = new PokemonClient({ cacheOptions: {} });
 
-  constructor() {}
+  // todo then do websockets
+  constructor(private _formBuilder: FormBuilder) {}
 
   ngOnInit(): void {
     console.log('TeamSearchComponent Init');

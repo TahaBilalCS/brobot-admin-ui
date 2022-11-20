@@ -1,9 +1,16 @@
-.angular-logo {
-  margin: 0 4px 3px 0;
-  height: 35px;
-  vertical-align: middle;
-}
-
 .fill-remaining-space {
   flex: 1 1 auto;
+}
+
+.title {
+  cursor: pointer;
+  font-family: Roboto Mono, "Lucida Handwriting", sans-serif;
+}
+
+mat-toolbar {
+  -webkit-box-shadow: 0 3px 5px rgba(57, 63, 72, 0.3);
+  -moz-box-shadow: 0 3px 5px rgba(57, 63, 72, 0.3);
+  box-shadow: 0 3px 5px rgba(22, 25, 28, 0.3);
+  position: relative;
+  z-index: 10;
 }

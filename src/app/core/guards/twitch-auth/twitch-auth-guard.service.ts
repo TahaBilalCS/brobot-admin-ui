@@ -6,16 +6,14 @@ import {
   RouterStateSnapshot,
   UrlTree,
 } from '@angular/router';
-import { catchError, map, Observable, of, take } from 'rxjs';
+import { catchError, map, Observable, of } from 'rxjs';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TwitchAuthGuard implements CanActivate {
-  constructor(private authService: AuthService, private router: Router) {
-    console.log('Auth Guard Constructor');
-  }
+  constructor(private authService: AuthService, private router: Router) {}
 
   canActivate(
     route: ActivatedRouteSnapshot,
@@ -25,18 +23,16 @@ export class TwitchAuthGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    console.log('Auth Guard Start');
-    if (this.authService.twitchUserStatus.getValue()) {
+    // Todo - Not urgent. But can set timeout for when auth will get rejected.
+    if (this.authService.twitchUserStatus$.getValue()) {
       return true;
     }
 
-    console.log('Auth Guard Check');
     return this.authService.authenticateTwitchUser().pipe(
       catchError(() => {
         return of(null);
       }),
       map((twitchUser) => {
-        console.log('Twitch User', twitchUser);
         if (twitchUser) {
           return true;
         }

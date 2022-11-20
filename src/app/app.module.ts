@@ -10,7 +10,7 @@ import { CoreModule } from './core/core.module';
 import { FeatureModule } from './feature/feature.module';
 import { SharedModule } from './shared/shared.module';
 
-const AppMaterialModules: [] = [];
+// const AppMaterialModules: [] = [];
 const GlobalModules = [CoreModule];
 const FeatureModules = [FeatureModule];
 const SharedModules = [SharedModule];
@@ -22,7 +22,7 @@ const SharedModules = [SharedModule];
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    ...AppMaterialModules,
+    // ...AppMaterialModules,
     ...GlobalModules,
     ...FeatureModules,
     ...SharedModules,
