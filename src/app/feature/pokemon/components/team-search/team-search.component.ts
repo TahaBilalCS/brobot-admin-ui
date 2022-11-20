@@ -13,6 +13,7 @@ export class TeamSearchComponent implements OnInit {
   // todo then do websockets
   constructor(private _formBuilder: FormBuilder) {}
 
+  value = '';
   ngOnInit(): void {
     console.log('TeamSearchComponent Init');
     // this.http

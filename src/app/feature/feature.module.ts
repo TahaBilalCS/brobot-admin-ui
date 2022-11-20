@@ -5,7 +5,7 @@ import {
   LoginComponent,
 } from 'src/app/feature/login/login.component';
 import { HomeComponent } from 'src/app/feature/home/home.component';
-import { MatLegacyButtonModule as MatButtonModule } from '@angular/material/legacy-button';
+import { MatButtonModule } from '@angular/material/button';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 
