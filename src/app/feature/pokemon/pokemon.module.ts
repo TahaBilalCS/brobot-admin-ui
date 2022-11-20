@@ -3,9 +3,9 @@ import { CommonModule } from '@angular/common';
 import { CardComponent } from './components/card/card.component';
 import { TeamSearchComponent } from './components/team-search/team-search.component';
 import { BattleOutcomeComponent } from './components/battle-outcome/battle-outcome.component';
-import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatLegacyFormFieldModule as MatFormFieldModule } from '@angular/material/legacy-form-field';
 import { MatIconModule } from '@angular/material/icon';
-import { MatInputModule } from '@angular/material/input';
+import { MatLegacyInputModule as MatInputModule } from '@angular/material/legacy-input';
 import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
