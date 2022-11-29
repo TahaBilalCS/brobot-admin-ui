@@ -10,6 +10,7 @@ import {
   Component,
   ElementRef,
   Inject,
+  OnDestroy,
   OnInit,
   Renderer2,
   ViewChild,
@@ -40,10 +41,11 @@ import {
     ]),
   ],
 })
-export class LoginComponent implements OnInit, AfterViewInit {
+export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
   twitchUserStatus$ = new BehaviorSubject<TwitchUserStatus | null>(null);
   loading$ = new BehaviorSubject<boolean>(true);
   btnHovered = false;
+  logoutHovered = false;
   apiUrl = environment.apiUrl;
   twitchLoginUrl = `${this.apiUrl}/api/auth/twitch/login`;
 
@@ -66,18 +68,18 @@ export class LoginComponent implements OnInit, AfterViewInit {
     private bottomSheet: MatBottomSheet
   ) {
     this.bgImgs = [
-      'https://res.cloudinary.com/dsmddewxs/image/upload/v1668829382/Home/drew-beamer-Vc1pJfvoQvY-unsplash.jpg',
-      'https://res.cloudinary.com/dsmddewxs/image/upload/v1668833540/Home/surprised-pikachu.gif',
-      'https://res.cloudinary.com/dsmddewxs/image/upload/v1668829378/Home/syed-hussaini-7VAfikKe9kU-unsplash.jpg',
-      'https://res.cloudinary.com/dsmddewxs/image/upload/v1668833540/Home/surprised-pikachu.gif',
-      'https://res.cloudinary.com/dsmddewxs/image/upload/v1668829385/Home/pexels-olena-bohovyk-3806690.jpg',
-      'https://res.cloudinary.com/dsmddewxs/image/upload/v1668833540/Home/surprised-pikachu.gif',
-      'https://res.cloudinary.com/dsmddewxs/image/upload/v1668673337/Home/1234_dges9y.jpg',
-      'https://res.cloudinary.com/dsmddewxs/image/upload/v1668833540/Home/surprised-pikachu.gif',
-      'https://res.cloudinary.com/dsmddewxs/image/upload/v1668829386/Home/randy-tarampi-U2eUlPEKIgU-unsplash.jpg',
-      'https://res.cloudinary.com/dsmddewxs/image/upload/v1668833540/Home/surprised-pikachu.gif',
-      'https://res.cloudinary.com/dsmddewxs/image/upload/v1668829374/Home/cat_caviar.jpg',
-      'https://res.cloudinary.com/dsmddewxs/image/upload/v1668833540/Home/surprised-pikachu.gif',
+      'https://res.cloudinary.com/dsmddewxs/image/upload/v1668829382/login/drew-beamer-Vc1pJfvoQvY-unsplash.jpg',
+      'https://res.cloudinary.com/dsmddewxs/image/upload/v1668833540/login/surprised-pikachu.gif',
+      'https://res.cloudinary.com/dsmddewxs/image/upload/v1668829378/login/syed-hussaini-7VAfikKe9kU-unsplash.jpg',
+      'https://res.cloudinary.com/dsmddewxs/image/upload/v1668833540/login/surprised-pikachu.gif',
+      'https://res.cloudinary.com/dsmddewxs/image/upload/v1668829385/login/pexels-olena-bohovyk-3806690.jpg',
+      'https://res.cloudinary.com/dsmddewxs/image/upload/v1668833540/login/surprised-pikachu.gif',
+      'https://res.cloudinary.com/dsmddewxs/image/upload/v1668673337/login/1234_dges9y.jpg',
+      'https://res.cloudinary.com/dsmddewxs/image/upload/v1668833540/login/surprised-pikachu.gif',
+      'https://res.cloudinary.com/dsmddewxs/image/upload/v1668829386/login/randy-tarampi-U2eUlPEKIgU-unsplash.jpg',
+      'https://res.cloudinary.com/dsmddewxs/image/upload/v1668833540/login/surprised-pikachu.gif',
+      'https://res.cloudinary.com/dsmddewxs/image/upload/v1668829374/login/cat_caviar.jpg',
+      'https://res.cloudinary.com/dsmddewxs/image/upload/v1668833540/login/surprised-pikachu.gif',
     ];
     this.currentImage = this.bgImgs[0];
   }
@@ -90,7 +92,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
     this.loading$ = this.authService.loading$;
 
     this.audio = new Audio(
-      'https://res.cloudinary.com/dsmddewxs/video/upload/v1668840551/Home/ZomboxWazzing.mp3'
+      'https://res.cloudinary.com/dsmddewxs/video/upload/v1668840551/login/ZomboxWazzing.mp3'
     );
 
     this.audio.loop = true;
@@ -99,10 +101,12 @@ export class LoginComponent implements OnInit, AfterViewInit {
 
     this.bottomSheet
       .open(BottomSheetAudioComponent, {
-        panelClass: 'bottom-sheet-audio',
         hasBackdrop: true,
         backdropClass: 'bottom-sheet-audio-backdrop',
-        data: this.audio,
+        data: {
+          audio: this.audio,
+          text: 'ANOTHER BUTTON WILL BE SOMEWHERE IN THE MIDDLE',
+        },
         disableClose: true,
       })
       .afterOpened()
@@ -115,6 +119,10 @@ export class LoginComponent implements OnInit, AfterViewInit {
     interval(5669).subscribe((x) => {
       this.runAnimation();
     });
+  }
+
+  ngOnDestroy() {
+    this.audio?.pause();
   }
 
   ngAfterViewInit() {
@@ -183,11 +191,9 @@ export class LoginComponent implements OnInit, AfterViewInit {
     <br />
 
     <span>
-      AFTER YOU CLICK THIS BUTTON,<br />
       <br />
-      ANOTHER BUTTON WILL BE SOMEWHERE IN THE MIDDLE</span
-    >
-    <br />
+      {{ data.text }}
+    </span>
 
     <br />
     <button (click)="playAudio()">CLICCCCCCCCKKKKKKK MEEEEEEEEEEEE</button>
@@ -195,13 +201,14 @@ export class LoginComponent implements OnInit, AfterViewInit {
 })
 export class BottomSheetAudioComponent {
   constructor(
-    @Inject(MAT_BOTTOM_SHEET_DATA) public data: HTMLAudioElement,
+    @Inject(MAT_BOTTOM_SHEET_DATA)
+    public data: { audio: HTMLAudioElement; text: string },
     private bottomSheetRef: MatBottomSheetRef<BottomSheetAudioComponent>
   ) {}
 
   async playAudio() {
     try {
-      await this.data.play();
+      await this.data.audio.play();
       this.bottomSheetRef.dismiss(true);
     } catch (err) {
       console.log('error', err);

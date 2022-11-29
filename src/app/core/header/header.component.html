@@ -1,17 +1,18 @@
 <mat-toolbar color="primary">
-  <!--  todo click on brobot title + icon to bring to home or login depending on auth hide client when logged out?-->
-  <span class="title" (click)="navHome()">Brobot</span>
-  <span class="fill-remaining-space"></span>
-  <!--  <a [href]="twitchLoginUrl">-->
-  <!--    <button mat-button color="red" *ngIf="!isAuthenticated">Login</button>-->
-  <!--  </a>-->
-  <ng-container
+  <section class="header-left">
+    <button mat-icon-button (click)="sidenavButtonClicked.emit()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span class="title" (click)="navHome()">bro_bot</span>
+  </section>
+  <section
+    class="header-right"
     *ngIf="(twitchUserStatus$ | async) && (loading$ | async) === false"
   >
     <a [href]="twitchStreamerLoginUrl">
       <button
         mat-button
-        color="red"
+        color="accent"
         *ngIf="
           (twitchUserStatus$ | async)?.displayName?.toLowerCase() ===
           allowedStreamer
@@ -23,7 +24,7 @@
     <a [href]="twitchBotLoginUrl">
       <button
         mat-button
-        color="red"
+        color="accent"
         *ngIf="
           (twitchUserStatus$ | async)?.displayName?.toLowerCase() === allowedBot
         "
@@ -31,6 +32,6 @@
         Login Bot
       </button>
     </a>
-    <button mat-button color="red" (click)="logout()">Logout</button>
-  </ng-container>
+    <button mat-button color="accent" (click)="logout()">Logout</button>
+  </section>
 </mat-toolbar>

@@ -15,6 +15,13 @@ import { AuthService } from 'src/app/core/services/auth/auth.service';
 export class TwitchAuthGuard implements CanActivate {
   constructor(private authService: AuthService, private router: Router) {}
 
+  // These are routes where auth is not required, but needed in order to populate the header bag login
+  acceptableRoutes = [
+    'pokemon/team',
+    'pokemon/battleoutcome',
+    'pokemon/leaderboard',
+    'commands',
+  ];
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
@@ -23,7 +30,7 @@ export class TwitchAuthGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    // Todo - Not urgent. But can set timeout for when auth will get rejected.
+    // TODO - Not urgent. But can set timeout for when auth will get rejected.
     if (this.authService.twitchUserStatus$.getValue()) {
       return true;
     }
@@ -36,7 +43,15 @@ export class TwitchAuthGuard implements CanActivate {
         if (twitchUser) {
           return true;
         }
-        this.router.navigate(['/login']);
+
+        if (!route.routeConfig?.path) {
+          this.router.navigate(['/commands']);
+          return false;
+        }
+        if (this.acceptableRoutes.includes(route.routeConfig.path)) {
+          return true;
+        }
+        this.router.navigate(['/commands']);
         return false;
       })
     );

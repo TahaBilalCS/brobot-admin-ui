@@ -12,7 +12,8 @@
       (mouseleave)="btnHovered = false"
       [href]="twitchLoginUrl"
       *ngIf="
-        (twitchUserStatus$ | async) === null && (loading$ | async) === false
+        (twitchUserStatus$ | async) === null && (loading$ | async) === false;
+        else logoutBtn
       "
     >
       <button mat-button color="blue">
@@ -21,5 +22,18 @@
         </span>
       </button>
     </a>
+    <ng-template #logoutBtn>
+      <button
+        mat-button
+        color="blue"
+        [routerLink]="'/'"
+        (mouseover)="logoutHovered = true"
+        (mouseleave)="logoutHovered = false"
+      >
+        <span [style.visibility]="logoutHovered ? 'visible' : 'hidden'">
+          You Are Already Logged In Or Something
+        </span>
+      </button>
+    </ng-template>
   </div>
 </div>

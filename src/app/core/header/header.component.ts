@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import {
   AuthService,
@@ -21,13 +21,14 @@ export class HeaderComponent implements OnInit {
   allowedStreamer = isDevMode() ? 'lebrotherbill' : 'tramadc';
   allowedBot = 'b_robot';
 
+  @Output() sidenavButtonClicked: EventEmitter<null> = new EventEmitter<null>();
+
   public twitchUserStatus$ = new BehaviorSubject<TwitchUserStatus | null>(null);
   public loading$ = new BehaviorSubject<boolean>(true);
 
   constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
-    console.log('HEADER INIT');
     this.twitchUserStatus$ = this.authService.twitchUserStatus$;
     this.loading$ = this.authService.loading$;
   }
@@ -36,7 +37,7 @@ export class HeaderComponent implements OnInit {
     this.authService.logout();
   }
 
-  navHome() {
-    this.router.navigate(['/home']).then();
+  async navHome() {
+    await this.router.navigate(['/commands']);
   }
 }

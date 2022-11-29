@@ -9,6 +9,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CoreModule } from './core/core.module';
 import { FeatureModule } from './feature/feature.module';
 import { SharedModule } from './shared/shared.module';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { LayoutModule } from '@angular/cdk/layout';
 
 // const AppMaterialModules: [] = [];
 const GlobalModules = [CoreModule];
@@ -26,6 +30,10 @@ const SharedModules = [SharedModule];
     ...GlobalModules,
     ...FeatureModules,
     ...SharedModules,
+    LayoutModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatButtonModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

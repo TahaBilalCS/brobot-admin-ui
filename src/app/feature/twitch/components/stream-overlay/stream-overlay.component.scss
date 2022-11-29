@@ -1,0 +1,113 @@
+.stream-overlay-container {
+  background: rgba(0, 0, 0, 0);
+  //background: #313131;
+  //background: white;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+// Good in this situation, keep full screen regardless of router config
+:host {
+  flex: 1 1 auto;
+}
+
+p {
+  color: white;
+  font-weight: 600;
+  font-size: 30px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body,
+html {
+  overflow: hidden;
+}
+
+.scroll {
+  position: relative;
+  width: 90vw;
+  border-radius: 5px;
+  box-shadow: 5px 5px 5px rgb(22 25 28);
+  height: 90px;
+  background-color: rgba(#252525, 0.3);
+  overflow: hidden;
+  z-index: 1;
+  padding: 0;
+  margin: auto auto 100px auto;
+  color: white;
+  font-family: "Electrolize-Regular", sans-serif;
+  font-weight: 600;
+  font-size: 50px;
+}
+
+span {
+  align-items: center;
+  font-size: 50px;
+  display: inline-flex;
+  padding: 0;
+  overflow: hidden;
+  height: 100%;
+  white-space: nowrap;
+  color: white;
+  margin-left: 110%;
+}
+
+//// Pokemon Roar
+//.pokemon-roar-container {
+//  transform: scale(0);
+//  opacity: 0;
+//}
+//.card-header {
+//  box-shadow: 0 0 40px 5px var(--card-color);
+//  padding-left: 10px;
+//  display: flex;
+//  align-items: center;
+//  justify-content: space-between;
+//  position: absolute;
+//  top: 24px;
+//  left: 26px;
+//  width: 265px;
+//  height: 37px;
+//
+//  .title-right {
+//    display: flex;
+//    margin-right: 5px;
+//    white-space: nowrap;
+//    text-shadow: -3px 0px 20px var(--card-color), 3px 0px 20px var(--card-color),
+//      0px 0px 20px var(--card-color), 3px 3px 20px var(--card-color),
+//      0px 3px 20px var(--card-color);
+//    color: black;
+//    font-family: "Electrolize-Regular", sans-serif;
+//    font-weight: 600;
+//    font-size: 20px;
+//  }
+//  .title-left {
+//    display: flex;
+//    align-items: center;
+//    justify-content: flex-start;
+//    width: 100%;
+//
+//    .name {
+//      text-shadow: -3px 0px 20px var(--card-color),
+//        3px 0px 20px var(--card-color), 0px 0px 20px var(--card-color),
+//        3px 3px 20px var(--card-color), 0px 3px 20px var(--card-color);
+//      color: black;
+//
+//      font-family: "Electrolize-Regular", sans-serif;
+//      font-weight: 600;
+//      font-size: 20px;
+//    }
+//    .gender-icon {
+//      z-index: 100;
+//      margin-left: 5px;
+//      color: var(--poke-color);
+//      font-weight: 600;
+//      font-size: 25px;
+//    }
+//  }
+//}

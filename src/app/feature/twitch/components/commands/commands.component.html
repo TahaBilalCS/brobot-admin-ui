@@ -1,0 +1,62 @@
+<section class="commands-container">
+  <h1>Commands List</h1>
+  <mat-accordion>
+    <mat-expansion-panel
+      *ngFor="let command of commandsList"
+      [hideToggle]="command.hideToggle"
+      (opened)="command.panelOpenState = true"
+      (closed)="command.panelOpenState = false"
+    >
+      <mat-expansion-panel-header>
+        <mat-panel-title> {{ command.title }} </mat-panel-title>
+        <mat-panel-description>
+          {{ command.description }}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <table
+        *ngIf="command.content.table; else innerPanel"
+        mat-table
+        [dataSource]="command.content.table.dataSource"
+        class="mat-elevation-z8"
+      >
+        <ng-container matColumnDef="command">
+          <th mat-header-cell *matHeaderCellDef>Command</th>
+          <td mat-cell *matCellDef="let element">{{ element.command }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="description">
+          <th mat-header-cell *matHeaderCellDef>Description</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.description }}
+          </td>
+        </ng-container>
+        <tr
+          mat-header-row
+          *matHeaderRowDef="command.content.table?.displayedColumns"
+        ></tr>
+        <tr
+          mat-row
+          *matRowDef="let row; columns: command.content.table?.displayedColumns"
+        ></tr>
+      </table>
+      <ng-template #innerPanel>
+        <mat-expansion-panel
+          (opened)="openPanel(command.content.panel)"
+          (closed)="closePanel(command.content.panel)"
+        >
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              {{ command.content.panel?.title }}
+            </mat-panel-title>
+            <mat-panel-description>
+              {{ command.content.panel?.description }}
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <p>
+            {{ command.content.panel?.content?.msg }}
+          </p>
+        </mat-expansion-panel>
+      </ng-template>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>

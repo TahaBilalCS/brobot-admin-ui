@@ -3,6 +3,9 @@ import { CommonModule } from '@angular/common';
 import { HeaderComponent } from 'src/app/core/header/header.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+// import { SideNavComponent } from 'src/app/core/side-nav/side-nav.component';
+// import { RouterOutlet } from '@angular/router';
 
 /**
  * This abstract class used for module building by extending this class
@@ -18,7 +21,7 @@ export abstract class EnsureImportedOnceModule {
   }
 }
 
-const MaterialModules = [MatToolbarModule, MatButtonModule];
+const MaterialModules = [MatToolbarModule, MatButtonModule, MatIconModule];
 
 @NgModule({
   declarations: [HeaderComponent],

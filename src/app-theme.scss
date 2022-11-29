@@ -8,6 +8,11 @@
 // Be sure that you only ever include this mixin once!
 @include mat.core();
 
+@font-face {
+  font-family: "Electrolize-Regular";
+  src: url("assets/fonts/Electrolize-Regular.ttf") format("truetype");
+}
+
 $app-primary: (
   50: red,
   100: red,
@@ -29,7 +34,7 @@ $app-primary: (
     200: red,
     300: red,
     400: red,
-    500: #ffffff,
+    500: #f1f1f1,
     600: red,
     700: red,
     800: red,
@@ -42,20 +47,20 @@ $app-primary: (
 );
 
 $app-accent: (
-  50: white,
-  100: white,
-  200: white,
-  300: white,
-  400: white,
-  500: white,
-  600: white,
-  700: white,
-  800: white,
-  900: white,
-  A100: white,
-  A200: white,
-  A400: white,
-  A700: white,
+  50: #f1f1f1,
+  100: #f1f1f1,
+  200: #f1f1f1,
+  300: #f1f1f1,
+  400: #f1f1f1,
+  500: #f1f1f1,
+  600: #f1f1f1,
+  700: #f1f1f1,
+  800: #f1f1f1,
+  900: #f1f1f1,
+  A100: #f1f1f1,
+  A200: #f1f1f1,
+  A400: #f1f1f1,
+  A700: #f1f1f1,
   contrast: (
     50: blue,
     100: blue,
@@ -74,6 +79,21 @@ $app-accent: (
   ),
 );
 
+//font-family: "Electrolize-Regular", sans-serif;
+//font-weight: 500;
+
+$h1-level: mat.define-typography-level(
+  $font-family: "Electrolize-Regular",
+  $font-weight: 500,
+  $font-size: 1rem,
+  $line-height: 1,
+  $letter-spacing: normal,
+);
+$app-typography: mat.define-typography-config(
+  // Specify "Comic Sans" as the default font family for all levels.
+  $font-family: "Electrolize-Regular",
+  $headline-5: $h1-level
+);
 $my-app-primary: mat.define-palette($app-primary);
 $my-app-accent: mat.define-palette($app-accent, A200, A100, A400);
 $my-app-warn: mat.define-palette(mat.$red-palette);
@@ -87,29 +107,23 @@ $dark-theme: mat.define-dark-theme(
       accent: $my-app-accent,
       warn: $my-app-warn,
     ),
-    // Only include `typography` and `density` in the default dark theme.
-    //typography: mat.define-legacy-typography-config(),
-    //density: 0,,,,,,
+    // Font/styles for material components
+    typography: $app-typography,
+    //density: 0,,,,,,,,,,,,,
   )
 );
 
 //// Apply the dark theme by default
 @include mat.all-component-themes($dark-theme);
-//@include mat.core-theme($dark-theme);
-//@include mat.button-theme($dark-theme);
-//@include mat.all-legacy-component-themes($dark-theme);
 
+h1,
+h2,
 p {
   color: mat.get-color-from-palette($my-app-accent, 500);
 }
-
-.bottom-sheet-audio-backdrop {
-  background-color: #0f0f0f;
-}
-
-.mat-bottom-sheet-container {
-  background-color: #1f1f1fff !important;
-}
+//@include mat.core-theme($dark-theme);
+//@include mat.button-theme($dark-theme);
+//@include mat.all-legacy-component-themes($dark-theme);
 
 // Define a light theme
 //$light-theme: mat.define-light-theme(

@@ -1,33 +1,57 @@
 import { Component, OnInit } from '@angular/core';
-interface BattleOutcomeRes {
-  body: {
-    outcome?: string[];
-  };
-}
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
+import { forkJoin } from 'rxjs';
+
+type BattleOutcomeRes = string[] | null;
 @Component({
   selector: 'app-battle-outcome',
   templateUrl: './battle-outcome.component.html',
   styleUrls: ['./battle-outcome.component.scss'],
 })
 export class BattleOutcomeComponent implements OnInit {
-  outcome: string = '';
+  starterOutcome: string = '';
+  teamOutcome: string = '';
+  apiUrl = environment.apiUrl;
 
-  constructor() {}
+  loading = true;
+  constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
     console.log('BattleOutcomeComponent ngOnInit');
-    // this.http.get(`${this.apiUrl}/api/pokemonteambattle`, {withCredentials: true, observe: "response"}).subscribe((res: any) => {
-    //   if (res instanceof HttpErrorResponse) {
-    //     console.log("ERROROROROROROR", res)
-    //     return;
+
+    const teamBattle = this.http.get<BattleOutcomeRes>(
+      `${this.apiUrl}/api/pokemonteambattle`,
+      {
+        withCredentials: true,
+      }
+    );
+
+    const starterBattle = this.http.get<BattleOutcomeRes>(
+      `${this.apiUrl}/api/pokemonbattle`,
+      {
+        withCredentials: true,
+      }
+    );
+
+    forkJoin([teamBattle, starterBattle]).subscribe((res) => {
+      console.log('forkJoin res', res);
+      this.teamOutcome = res[0] ? res[0].join(' ') : '';
+      this.starterOutcome = res[1] ? res[1].join(' ') : '';
+      this.loading = false;
+    });
+
+    // .subscribe((res: BattleOutcomeRes) => {
+    //   console.log('res', res);
+    //   if (res) {
+    //     this.teamOutcome = res.join('\r\n');
     //   }
-    //   console.log("Pokemon Battle", res)
-    //   // @ts-ignore
-    //   if(res.body?.outcome) {
-    //     // @ts-ignore
-    //     this.outcome = res.body.outcome.join('\r\n')
-    //     // console.log("Pokemon Battle", this.outcome)
+    // });
+
+    // .subscribe((res: BattleOutcomeRes) => {
+    //   if (res) {
+    //     this.starterOutcome = res.join('\r\n');
     //   }
-    // })
+    // });
   }
 }

@@ -82,7 +82,7 @@ export class AuthService {
       .subscribe((res) => {
         if (res.status === 200) {
           this.twitchUserStatus$.next(null);
-          this.router.navigate(['/login']);
+          this.router.navigate(['/commands']);
         }
       });
   }
