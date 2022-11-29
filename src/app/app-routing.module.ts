@@ -9,7 +9,7 @@ import { LeaderboardComponent } from 'src/app/feature/pokemon/components/leaderb
 import { StreamOverlayComponent } from 'src/app/feature/twitch/components/stream-overlay/stream-overlay.component';
 import { CommandsComponent } from 'src/app/feature/twitch/components/commands/commands.component';
 
-// The problem with using auth guards for public routes is that it won't load until after
+// TODO: The problem with using auth guards for public routes is that it won't load until after
 // the status request is completed, this can make the app feel laggy
 const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [TwitchAuthGuard] },
