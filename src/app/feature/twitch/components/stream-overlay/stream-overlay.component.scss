@@ -14,7 +14,7 @@
 }
 
 p {
-  color: white !important;
+  color: white;
   font-weight: 600;
   font-size: 30px;
 }
@@ -34,12 +34,12 @@ html {
   border-radius: 5px;
   box-shadow: 5px 5px 5px rgb(22 25 28);
   height: 90px;
-  background-color: rgba(#252525, 1) !important;
+  background-color: rgba(#252525, 1);
   overflow: hidden;
   z-index: 1;
   padding: 0;
   margin: auto auto 100px auto;
-  color: white !important;
+  color: white;
   font-family: "Electrolize-Regular", sans-serif;
   font-weight: 600;
   font-size: 50px;
@@ -53,7 +53,7 @@ span {
   overflow: hidden;
   height: 100%;
   white-space: nowrap;
-  color: white !important;
+  color: white;
   margin-left: 110%;
 }
 
