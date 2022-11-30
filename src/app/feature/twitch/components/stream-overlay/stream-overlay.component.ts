@@ -329,10 +329,3 @@ export class StreamOverlayComponent implements OnInit, AfterViewInit {
     }
   }
 }
-
-// todo
-// dont forget to make p okemon timer longer
-// cleaning up (all commands, console logs)
-// figure out url changes admin.brobot.live swap with api and deploy frontend
-// figure out pokemon db change
-// test event subs and channel point redeems, and commands

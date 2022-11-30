@@ -39,6 +39,36 @@
           *matRowDef="let row; columns: command.content.table?.displayedColumns"
         ></tr>
       </table>
+      <section *ngIf="command.title === 'Pokemon'">
+        <h2>Details</h2>
+        <h2>Pokemon Create</h2>
+        <p>You can randomly generate 1 of 493 pokemon from Gen1 - Gen4.</p>
+        <p>A pokemon has a 1 in 250 chance to be shiny</p>
+        <p>Pokemon can now have a gender, nature, and ability</p>
+        <h2>Pokemon Drops</h2>
+        <p>
+          Every 2 hours, a pokemon will appear in chat regardless if the stream
+          is live or not. If you have an empty slot, you can catch it.
+        </p>
+        <p>A pokemon drop has a 1 in 8 chance of being shiny</p>
+        <h2>Side Notes</h2>
+        <p>
+          Pokemon battles are simulated using Pokemon Showdown. THESE ARE REAL
+          BATTLES, YOUR OVERALL LEVEL AND TEAM MATTERS
+        </p>
+        <p>Pokemon can go all the way up to level 9999 :O</p>
+        <p>You can only remove 3 pokemon a day from your team</p>
+        <p>
+          All a pokemon's available moves are based on what they CAN learn (TMs
+          included)
+        </p>
+        <p>
+          If a pokemon team wins, all the pokemon get their wins incremented by
+          1. The opposite is true when losing.
+        </p>
+        <p></p>
+      </section>
+
       <ng-template #innerPanel>
         <mat-expansion-panel
           (opened)="openPanel(command.content.panel)"

@@ -89,6 +89,7 @@ $h1-level: mat.define-typography-level(
   $line-height: 1,
   $letter-spacing: normal,
 );
+
 $app-typography: mat.define-typography-config(
   // Specify "Comic Sans" as the default font family for all levels.
   $font-family: "Electrolize-Regular",

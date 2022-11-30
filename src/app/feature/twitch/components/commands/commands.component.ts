@@ -40,27 +40,6 @@ export class CommandsComponent implements OnInit {
   commandsList: ExpansionPanel[] = [
     {
       hideToggle: false,
-      title: 'Specialty',
-      description: 'Click to expand',
-      panelOpenState: false,
-      content: {
-        table: {
-          dataSource: [
-            {
-              command: '!chatban',
-              description: `Once the vote threshold is reached, the streamer will be banned from pressing the "Enter" key for 5 minutes. Please cage this rat. You're doing God's work`,
-            },
-            {
-              command: '!voiceban',
-              description: `Once the vote threshold is reached, the streamer will have their microphone muted for 30 seconds.`,
-            },
-          ],
-          displayedColumns: ['command', 'description'],
-        },
-      },
-    },
-    {
-      hideToggle: false,
       title: 'Pokemon',
       description: 'Click to expand',
       panelOpenState: false,
@@ -99,6 +78,27 @@ export class CommandsComponent implements OnInit {
     },
     {
       hideToggle: false,
+      title: 'Voting',
+      description: 'Click to expand',
+      panelOpenState: false,
+      content: {
+        table: {
+          dataSource: [
+            {
+              command: '!chatban',
+              description: `Once the vote threshold is reached, the streamer will be banned from pressing the "Enter" key for 5 minutes. Please cage this rat. You're doing God's work`,
+            },
+            {
+              command: '!voiceban',
+              description: `Once the vote threshold is reached, the streamer will have their microphone muted for 30 seconds.`,
+            },
+          ],
+          displayedColumns: ['command', 'description'],
+        },
+      },
+    },
+    {
+      hideToggle: false,
       title: 'Other',
       description: 'Click to expand',
       panelOpenState: false,
@@ -126,13 +126,95 @@ export class CommandsComponent implements OnInit {
         },
       },
     },
-    // {
-    //   hideToggle: false,
-    //   title: 'Self aware panel',
-    //   description: ` Currently I am Description`,
-    //   panelOpenState: false,
-    //   content: {},
-    // },
+    {
+      hideToggle: false,
+      title: 'Streamlabs (NOT RELATED TO BROBOT)',
+      description: 'Click to expand',
+      panelOpenState: false,
+      content: {
+        table: {
+          dataSource: [
+            {
+              command: '!discord',
+              description: `Get discord link`,
+            },
+            {
+              command: '!watchtime',
+              description: `How many hours you watched`,
+            },
+            {
+              command: '!followers',
+              description: `Get follower count`,
+            },
+            {
+              command: '!subs',
+              description: `Get sub count`,
+            },
+            {
+              command: '!followage',
+              description: `How long you've been following`,
+            },
+            {
+              command: '!lurk',
+              description: `Used to garner attention with minimal effort`,
+            },
+            {
+              command: '!uptime',
+              description: `How long streamer be streamin'`,
+            },
+            {
+              command: '!song',
+              description: `Will display the current spotify song that is playing`,
+            },
+            {
+              command: '!rank',
+              description: `Problem?`,
+            },
+            {
+              command: '!youtube',
+              description: `Get a link to the youtube channel that is rotting away`,
+            },
+            {
+              command: '!twitter',
+              description: `Elon go burr`,
+            },
+            {
+              command: '!so',
+              description: `Mods only. Used to shoutout another streamer`,
+            },
+            {
+              command: '!playlist',
+              description: `Get a link to some spotify playlists`,
+            },
+            {
+              command: '!nightmare',
+              description: `Wut`,
+            },
+            {
+              command: '!hi-c',
+              description: `This one is controversial`,
+            },
+            {
+              command: '!TramaDC',
+              description: `The Magician`,
+            },
+            {
+              command: '!camille',
+              description: `Get a highly sought after link to one of the top camille guides in the world`,
+            },
+            {
+              command: '!height',
+              description: `This one is a lie`,
+            },
+            {
+              command: '!ramagood',
+              description: `Apes together stronk`,
+            },
+          ],
+          displayedColumns: ['command', 'description'],
+        },
+      },
+    },
   ];
   dataSource: any = [];
 

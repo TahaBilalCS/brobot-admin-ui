@@ -33,7 +33,7 @@
       <mat-icon>search</mat-icon>
     </button>
   </section>
-  <p style="color: red" *ngIf="errored">No teams found for user</p>
+  <p style="color: red" *ngIf="errored">No user or team found</p>
   <section class="pokemon-cards" [style.visibility]="loading ? 'hidden' : ''">
     <section
       *ngFor="let pokemon of userPokemon; let indexCard = index"
