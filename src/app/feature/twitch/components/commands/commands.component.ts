@@ -65,7 +65,7 @@ export class CommandsComponent {
             },
             {
               command: `!pokemon delete <slot number>`,
-              description: `Delete a pokemon from that slot permanently. Example: !pokemon delete 1 (Deletes your starter pokemon). Alternatives to using "delete" are, "remove", "kill", and "slaughter"`,
+              description: `Delete a pokemon from that slot permanently. Example: !pokemon delete 1 (Deletes your starter pokemon). Alternative to using "delete" is, "remove"`,
             },
             {
               command: `!pokemon swap <slot number 1> <slot number 2>`,
