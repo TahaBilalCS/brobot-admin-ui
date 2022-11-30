@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { environment } from 'src/environments/environment';
 
 interface CommandTableData {
@@ -33,7 +33,7 @@ interface ExpansionPanel {
   templateUrl: './commands.component.html',
   styleUrls: ['./commands.component.scss'],
 })
-export class CommandsComponent implements OnInit {
+export class CommandsComponent {
   constructor() {}
   apiUrl = environment.apiUrl;
 
@@ -224,5 +224,4 @@ export class CommandsComponent implements OnInit {
   closePanel(panel?: InnerPanel) {
     if (panel) panel.panelOpenState = false;
   }
-  ngOnInit(): void {}
 }
