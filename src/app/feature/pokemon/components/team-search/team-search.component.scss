@@ -189,7 +189,7 @@
           position: absolute;
           top: 10px;
           white-space: nowrap;
-          color: black;
+          color: black !important;
           font-family: "Electrolize-Regular", sans-serif;
           font-weight: 600;
           font-size: 20px;
@@ -226,7 +226,7 @@
           text-shadow: -3px 0px 20px var(--card-color),
             3px 0px 20px var(--card-color), 0px 0px 20px var(--card-color),
             3px 3px 20px var(--card-color), 0px 3px 20px var(--card-color);
-          color: black;
+          color: black !important;
           font-family: "Electrolize-Regular", sans-serif;
           font-weight: 600;
           font-size: 20px;
@@ -241,7 +241,7 @@
             text-shadow: -3px 0px 20px var(--card-color),
               3px 0px 20px var(--card-color), 0px 0px 20px var(--card-color),
               3px 3px 20px var(--card-color), 0px 3px 20px var(--card-color);
-            color: black;
+            color: black !important;
 
             font-family: "Electrolize-Regular", sans-serif;
             font-weight: 600;
