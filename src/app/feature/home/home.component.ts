@@ -123,7 +123,9 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnInit(): void {
     this.twitchUser$ = this.authService.twitchUserStatus$;
-    if (this.twitchUser$.value?.displayName === this.allowedStreamer) {
+    if (
+      this.twitchUser$.value?.displayName.toLowerCase() === this.allowedStreamer
+    ) {
       this.audio = new Audio(
         'https://res.cloudinary.com/dsmddewxs/video/upload/v1669618409/streamer-home/009-Sound-System.mp3'
       );
