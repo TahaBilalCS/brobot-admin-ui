@@ -19,7 +19,7 @@ export class HeaderComponent implements OnInit {
   twitchBotLoginUrl = `${this.apiUrl}/api/auth/twitch/login3`;
 
   allowedStreamer = isDevMode() ? 'lebrotherbill' : 'tramadc';
-  allowedBot = 'b_robot';
+  allowedBot = 'bro_____bot';
 
   @Output() sidenavButtonClicked: EventEmitter<null> = new EventEmitter<null>();
 
