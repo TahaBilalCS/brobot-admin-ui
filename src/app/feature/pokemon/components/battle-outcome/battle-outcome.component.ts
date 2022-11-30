@@ -18,8 +18,6 @@ export class BattleOutcomeComponent implements OnInit {
   constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
-    console.log('BattleOutcomeComponent ngOnInit');
-
     const teamBattle = this.http.get<BattleOutcomeRes>(
       `${this.apiUrl}/api/pokemonteambattle`,
       {
@@ -35,23 +33,9 @@ export class BattleOutcomeComponent implements OnInit {
     );
 
     forkJoin([teamBattle, starterBattle]).subscribe((res) => {
-      console.log('forkJoin res', res);
       this.teamOutcome = res[0] ? res[0].join(' ') : '';
       this.starterOutcome = res[1] ? res[1].join(' ') : '';
       this.loading = false;
     });
-
-    // .subscribe((res: BattleOutcomeRes) => {
-    //   console.log('res', res);
-    //   if (res) {
-    //     this.teamOutcome = res.join('\r\n');
-    //   }
-    // });
-
-    // .subscribe((res: BattleOutcomeRes) => {
-    //   if (res) {
-    //     this.starterOutcome = res.join('\r\n');
-    //   }
-    // });
   }
 }

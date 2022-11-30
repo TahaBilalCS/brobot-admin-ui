@@ -36,7 +36,6 @@ export class AuthService {
   constructor(private router: Router, private http: HttpClient) {}
 
   public authenticateTwitchUser(): Observable<TwitchUserStatus | null> {
-    console.log('authenticateTwitchUser');
     this.loading$.next(true);
     return this.http
       .get<TwitchUserStatus>(`${this.apiUrl}/api/auth/twitch/status`, {
@@ -67,7 +66,6 @@ export class AuthService {
           }
         }),
         finalize(() => {
-          console.log('Auth Twitch User Complete');
           this.loading$.next(false);
         })
       );

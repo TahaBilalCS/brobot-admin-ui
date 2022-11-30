@@ -106,7 +106,6 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('APP INIT');
     this.breakpointObserver
       .observe(['(min-width: 961px)'])
       .subscribe((state: BreakpointState) => {

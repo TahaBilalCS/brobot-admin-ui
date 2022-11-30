@@ -211,7 +211,7 @@ export class BottomSheetAudioComponent {
       await this.data.audio.play();
       this.bottomSheetRef.dismiss(true);
     } catch (err) {
-      console.log('error', err);
+      console.error(err);
     }
   }
 }

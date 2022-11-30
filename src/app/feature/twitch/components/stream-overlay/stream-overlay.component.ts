@@ -127,8 +127,11 @@ const pokemonRoarAnimationMS = 300;
 })
 export class StreamOverlayComponent implements OnInit, AfterViewInit {
   apiUrl = environment.apiUrl;
+  onOpenSubject = new Subject();
+
   private wsSubject = webSocket<WSMessage>({
     url: environment.wsUrl,
+    openObserver: this.onOpenSubject,
   });
 
   public audioDEBS = new Audio(
@@ -164,16 +167,13 @@ export class StreamOverlayComponent implements OnInit, AfterViewInit {
   }
 
   async ngAfterViewInit() {
-    console.log('Stream Overlay Subscribe Socket', this.streamContainerRef);
     this.wsSubject.pipe(retry({ delay: 3000 })).subscribe({
       next: (msg) => {
         if (!msg.event) {
-          console.error('No Event', msg);
           return;
         }
         switch (msg.event) {
           case IncomingEvents.QUACK:
-            console.log('Quack', msg);
             const audioQuack = new Audio(
               'https://res.cloudinary.com/dsmddewxs/video/upload/v1669460570/stream-overlay/duck.mp3'
             );
@@ -244,20 +244,20 @@ export class StreamOverlayComponent implements OnInit, AfterViewInit {
         }
       }, // Called whenever there is a message from the server.
       error: (err) => console.error('Error Socket', err), // Called if at any point WebSocket API signals some kind of error.
-      complete: () => console.log('Socket Complete'), // Called when connection is closed (for whatever reason).
+      complete: () => {}, // Called when connection is closed (for whatever reason).
     });
   }
+
   async ngOnInit(): Promise<void> {
-    this.queue
-      .pipe(concatMap((item: any) => this.onDebsAlert(item)))
-      .subscribe((res) => {
-        // console.log('Debs Alert Complete', res);
-      });
     this.audioDEBS.load();
     this.audioWindowsStartup.load();
-    // this.audioQuack.load();
-    // this.audioQuack.volume = 0.3;
-    await this.onStartup();
+
+    this.onOpenSubject.subscribe((res) => {
+      this.onStartup();
+    });
+    this.queue
+      .pipe(concatMap((item: any) => this.onDebsAlert(item)))
+      .subscribe((res) => {});
   }
 
   getPokemonUrls(pokemon: PokemonRoarEventData): {
@@ -294,7 +294,6 @@ export class StreamOverlayComponent implements OnInit, AfterViewInit {
         data: name,
       };
       this.wsSubject.next(<DebsAlertCompleteData>debsData);
-      console.error('Max Alert Count Reached');
       return;
     }
     this.alertCount++;
@@ -310,7 +309,7 @@ export class StreamOverlayComponent implements OnInit, AfterViewInit {
       this.debsAlertDuration = Math.ceil(charCount / 16.7) * 1000 + 3000;
       await this.audioDEBS.play();
     } catch (err) {
-      console.log('DEBS ALERT FAILED', err);
+      console.error('DEBS ALERT FAILED', err);
     }
     await this.delay(this.debsAlertDuration);
     this.showDebsAlert = false;
@@ -326,12 +325,13 @@ export class StreamOverlayComponent implements OnInit, AfterViewInit {
       this.audioWindowsStartup.volume = 0.2;
       await this.audioWindowsStartup.play();
     } catch (err) {
-      console.log('Startup Sound Failed', err);
+      console.error('Startup Sound Failed', err);
     }
   }
 }
 
 // todo
+// dont forget to make p okemon timer longer
 // cleaning up (all commands, console logs)
 // figure out url changes admin.brobot.live swap with api and deploy frontend
 // figure out pokemon db change
