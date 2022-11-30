@@ -238,6 +238,27 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
       });
   }
 
+  onDeleteChannelRedemptions() {
+    this.http
+      .post(
+        `${this.apiUrl}/api/deleteChannelPointRedeems`,
+        {},
+        { withCredentials: true }
+      )
+      .pipe(
+        catchError((err) => {
+          return of(err);
+        })
+      )
+      .subscribe((res) => {
+        if (res instanceof HttpErrorResponse) {
+          window.alert('Error Deleting Redemptions');
+          return;
+        }
+        window.alert('Deleted Channel Point Redeems');
+      });
+  }
+
   onDisableChannelRedemptions() {
     this.http
       .post(
