@@ -4,7 +4,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { catchError, of } from 'rxjs';
+import { catchError, of, take } from 'rxjs';
 
 // import { PokemonClient } from 'pokenode-ts';
 
@@ -160,7 +160,7 @@ export class TeamSearchComponent implements OnInit {
   searchTimeReady = true;
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe((params) => {
+    this.route.queryParams.pipe(take(1)).subscribe((params) => {
       if (params['username']) {
         this.username.setValue(params['username']);
         this.onSubmit();
@@ -234,6 +234,11 @@ export class TeamSearchComponent implements OnInit {
             setTimeout(() => {
               this.searchTimeReady = true;
             }, 2000);
+          } else {
+            this.errored = true;
+            this.searchTimeReady = true;
+            this.loading = false;
+            return;
           }
         });
   }
