@@ -177,7 +177,7 @@ export class StreamOverlayComponent implements OnInit, AfterViewInit {
             const audioQuack = new Audio(
               'https://res.cloudinary.com/dsmddewxs/video/upload/v1669460570/stream-overlay/duck.mp3'
             );
-            audioQuack.volume = 0.2;
+            audioQuack.volume = 0.4;
             audioQuack.play();
             break;
           case IncomingEvents.POKEMON_ROAR:
