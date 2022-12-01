@@ -12,12 +12,12 @@ body {
 }
 
 .mat-bottom-sheet-container {
-  background-color: #1f1f1fff;
+  background-color: #1f1f1fff !important;
 }
 
 .poke-stats-dialog {
   .mat-mdc-dialog-surface {
-    background-color: rgb(0 0 0 / 50%);
+    background-color: rgb(0 0 0 / 50%) !important;
   }
 }
 
