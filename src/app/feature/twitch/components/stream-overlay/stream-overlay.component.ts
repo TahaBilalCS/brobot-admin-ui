@@ -179,6 +179,9 @@ export class StreamOverlayComponent implements OnInit, AfterViewInit {
             );
             audioQuack.volume = 0.4;
             audioQuack.play();
+            setTimeout(() => {
+              audioQuack.play();
+            }, 300);
             break;
           case IncomingEvents.POKEMON_ROAR:
             {
