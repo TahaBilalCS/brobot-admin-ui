@@ -61,7 +61,7 @@ export class CommandsComponent {
             },
             {
               command: '!pokemon catch',
-              description: `Every 2 hours, a random pokemon with a higher change of being shiny can appear. Make sure you have an available slot before trying to catch. You have 3 attempts to catch it using this command`,
+              description: `Every hour on the 69th minute, a random pokemon with a higher change of being shiny can appear. Make sure you have an available slot before trying to catch. You have 3 attempts to catch it using this command`,
             },
             {
               command: `!pokemon delete <slot number>`,
