@@ -29,6 +29,7 @@ export enum IncomingEvents {
   POKEMON_ROAR = 'pokemon_roar',
   DEBS_ALERT = 'debs_alert',
   QUACK = 'quack',
+  RELOAD_BROWSER_SOURCE = 'reload_browser_source',
 }
 
 export interface WSMessage {
@@ -173,6 +174,10 @@ export class StreamOverlayComponent implements OnInit, AfterViewInit {
           return;
         }
         switch (msg.event) {
+          case IncomingEvents.RELOAD_BROWSER_SOURCE:
+            console.log('Reload');
+            location.reload();
+            break;
           case IncomingEvents.QUACK:
             const audioQuack = new Audio(
               'https://res.cloudinary.com/dsmddewxs/video/upload/v1669460570/stream-overlay/duck.mp3'

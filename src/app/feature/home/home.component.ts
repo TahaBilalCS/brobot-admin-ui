@@ -259,6 +259,28 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
       });
   }
 
+  onReloadBrowserSource() {
+    this.http
+      .post(
+        `${this.apiUrl}/api/reloadBrowserSource`,
+        {},
+        { withCredentials: true }
+      )
+      .pipe(
+        catchError((err) => {
+          return of(err);
+        })
+      )
+      .subscribe((res) => {
+        if (res instanceof HttpErrorResponse) {
+          console.log(res);
+          window.alert('Error Reloading Browser Source');
+          return;
+        }
+        window.alert('Reloaded Browser Source');
+      });
+  }
+
   onDisableChannelRedemptions() {
     this.http
       .post(
