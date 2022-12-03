@@ -273,11 +273,17 @@ export class StreamOverlayComponent implements OnInit, AfterViewInit {
     this.audioWindowsStartup.load();
 
     this.onOpenSubject.subscribe((res) => {
-      // this.onStartup();
+      this.onStartup();
     });
     this.queue
       .pipe(concatMap((item: any) => this.onDebsAlert(item)))
       .subscribe((res) => {});
+    //
+    // setTimeout(() => {
+    //   let msg =
+    //     "According to all known laws of aviation, there is no way a bee should be able to fly. \nIts wings are too small to get its fat little body off the ground. The bee, of course, flies anyway because bees don't care what humans think is impossible. Yellow, black. Yellow, black. Yellow, black. Yellow, black. Ooh, black and yellow!";
+    //   this.onDebsButton(msg, 'Barry');
+    // });
   }
 
   getPokemonUrls(pokemon: PokemonRoarEventData): {
@@ -322,14 +328,16 @@ export class StreamOverlayComponent implements OnInit, AfterViewInit {
 
   async onDebsAlert(msg: string) {
     let scrollWid = 1730;
+    const parsedMsg = msg.replace(/(\r\n|\n|\r)/gm, '');
+
     if (this.textMarquee) {
       const p = this.textMarquee.nativeElement;
-      this.textMarquee.nativeElement.innerText = msg;
+      this.textMarquee.nativeElement.innerText = parsedMsg;
       scrollWid = p.scrollWidth;
     }
     this.showDebsAlert = true;
 
-    this.debsAlertMsg = msg;
+    this.debsAlertMsg = parsedMsg;
     try {
       this.debsAlertDuration = Math.ceil(scrollWid / 280) * 1000 + 4000; //+ 4000;
       await this.audioDEBS.play();
