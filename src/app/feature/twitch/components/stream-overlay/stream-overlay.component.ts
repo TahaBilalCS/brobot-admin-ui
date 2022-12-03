@@ -64,7 +64,7 @@ const pokemonRoarAnimationMS = 300;
   styleUrls: ['./stream-overlay.component.scss'],
   animations: [
     trigger('alertBoxTrigger', [
-      transition(':enter', [
+      transition('false => true', [
         group([
           animate(
             '750ms ease-in-out',
@@ -73,22 +73,22 @@ const pokemonRoarAnimationMS = 300;
               style({ transform: 'scale(1)', opacity: 1 }),
             ])
           ),
-          query('span', [
+          query('p', [
             animate(
               '{{animDuration}}ms linear',
               keyframes([
                 style({
-                  transform: 'translateX(0%)',
+                  transform: 'translateX(1730px)',
                 }),
                 style({
-                  transform: 'translateX(calc(-100% - 1920px))',
+                  transform: 'translateX(calc(-100%))',
                 }),
               ])
             ),
           ]),
         ]),
       ]),
-      transition(':leave', [
+      transition('true => false', [
         group([
           animate(
             '750ms ease-in-out',
@@ -162,6 +162,14 @@ export class StreamOverlayComponent implements OnInit, AfterViewInit {
 
   @ViewChild('streamContainer') streamContainerRef!: ElementRef;
 
+  textMarquee?: ElementRef;
+  @ViewChild('textMarquee') set content(content: ElementRef) {
+    if (content) {
+      // initially setter gets called with undefined
+      this.textMarquee = content;
+    }
+  }
+
   private randomIntFromInterval(min: number, max: number): number {
     // min and max included
     return Math.floor(Math.random() * (max - min + 1) + min);
@@ -182,11 +190,15 @@ export class StreamOverlayComponent implements OnInit, AfterViewInit {
             const audioQuack = new Audio(
               'https://res.cloudinary.com/dsmddewxs/video/upload/v1669460570/stream-overlay/duck.mp3'
             );
+            const audioQuack2 = new Audio(
+              'https://res.cloudinary.com/dsmddewxs/video/upload/v1669460570/stream-overlay/duck.mp3'
+            );
             audioQuack.volume = 0.4;
+            audioQuack2.volume = 0.4;
             audioQuack.play();
             setTimeout(() => {
-              audioQuack.play();
-            }, 300);
+              audioQuack2.play();
+            }, 200);
             break;
           case IncomingEvents.POKEMON_ROAR:
             {
@@ -261,7 +273,7 @@ export class StreamOverlayComponent implements OnInit, AfterViewInit {
     this.audioWindowsStartup.load();
 
     this.onOpenSubject.subscribe((res) => {
-      this.onStartup();
+      // this.onStartup();
     });
     this.queue
       .pipe(concatMap((item: any) => this.onDebsAlert(item)))
@@ -309,12 +321,17 @@ export class StreamOverlayComponent implements OnInit, AfterViewInit {
   }
 
   async onDebsAlert(msg: string) {
+    let scrollWid = 1730;
+    if (this.textMarquee) {
+      const p = this.textMarquee.nativeElement;
+      this.textMarquee.nativeElement.innerText = msg;
+      scrollWid = p.scrollWidth;
+    }
     this.showDebsAlert = true;
+
     this.debsAlertMsg = msg;
     try {
-      const charCount = msg.length;
-      // 500 max char - 30s, lower bound - 9s
-      this.debsAlertDuration = Math.ceil(charCount / 16.7) * 1000 + 3000;
+      this.debsAlertDuration = Math.ceil(scrollWid / 280) * 1000 + 4000; //+ 4000;
       await this.audioDEBS.play();
     } catch (err) {
       console.error('DEBS ALERT FAILED', err);

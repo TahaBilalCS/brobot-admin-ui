@@ -43,9 +43,23 @@ html {
   font-family: "Electrolize-Regular", sans-serif;
   font-weight: 600;
   font-size: 50px;
+  opacity: 0;
 }
 
-span {
+//span {
+//  align-items: center;
+//  font-size: 50px;
+//  display: inline-flex;
+//  padding: 0;
+//  overflow: hidden;
+//  height: 100%;
+//  white-space: nowrap;
+//  color: white;
+//  margin-left: 110%;
+//  //animation: move 60s infinite linear;
+//}
+
+.marquee {
   align-items: center;
   font-size: 50px;
   display: inline-flex;
@@ -54,60 +68,6 @@ span {
   height: 100%;
   white-space: nowrap;
   color: white;
-  margin-left: 110%;
+  transform: translateX(1730px);
+  margin: 5px 0 0 0;
 }
-
-//// Pokemon Roar
-//.pokemon-roar-container {
-//  transform: scale(0);
-//  opacity: 0;
-//}
-//.card-header {
-//  box-shadow: 0 0 40px 5px var(--card-color);
-//  padding-left: 10px;
-//  display: flex;
-//  align-items: center;
-//  justify-content: space-between;
-//  position: absolute;
-//  top: 24px;
-//  left: 26px;
-//  width: 265px;
-//  height: 37px;
-//
-//  .title-right {
-//    display: flex;
-//    margin-right: 5px;
-//    white-space: nowrap;
-//    text-shadow: -3px 0px 20px var(--card-color), 3px 0px 20px var(--card-color),
-//      0px 0px 20px var(--card-color), 3px 3px 20px var(--card-color),
-//      0px 3px 20px var(--card-color);
-//    color: black;
-//    font-family: "Electrolize-Regular", sans-serif;
-//    font-weight: 600;
-//    font-size: 20px;
-//  }
-//  .title-left {
-//    display: flex;
-//    align-items: center;
-//    justify-content: flex-start;
-//    width: 100%;
-//
-//    .name {
-//      text-shadow: -3px 0px 20px var(--card-color),
-//        3px 0px 20px var(--card-color), 0px 0px 20px var(--card-color),
-//        3px 3px 20px var(--card-color), 0px 3px 20px var(--card-color);
-//      color: black;
-//
-//      font-family: "Electrolize-Regular", sans-serif;
-//      font-weight: 600;
-//      font-size: 20px;
-//    }
-//    .gender-icon {
-//      z-index: 100;
-//      margin-left: 5px;
-//      color: var(--poke-color);
-//      font-weight: 600;
-//      font-size: 25px;
-//    }
-//  }
-//}

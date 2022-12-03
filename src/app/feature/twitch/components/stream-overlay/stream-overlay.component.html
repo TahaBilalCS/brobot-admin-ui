@@ -1,15 +1,11 @@
 <section class="stream-overlay-container" #streamContainer>
-  <!--    <button (click)="onDebsButton('Hi' + alertCount, 'bill')">DEBS</button>-->
   <section
     class="scroll"
-    *ngIf="showDebsAlert"
     [@alertBoxTrigger]="{
-      value: '',
+      value: showDebsAlert,
       params: { animDuration: debsAlertDuration }
     }"
   >
-    <span>
-      {{ debsAlertMsg }}
-    </span>
+    <p class="marquee" #textMarquee></p>
   </section>
 </section>
